@@ -33,9 +33,16 @@ const tableConfigs = {
 
 ## Available Tables
 
-1. **rir-generation-table** - RIR Generation (standard 2-row format)
+1. **rir-generation-table** - RIR Generation (special 6-row format with Gencho variations)
 2. **real-world-table** - RIR Generation on real-world recordings (standard 2-row format)
 3. **text-controllable-table** - Text-Controllable RIR Generation (special 4-column format)
+
+## RIR Generation Table Structure
+
+The RIR generation table has a special 6-row structure per example:
+- **Rows 1-2**: First 5 columns (Dry Speech, Input & Target, FiNS variants) show IR + reverberant speech
+- **Rows 3-6**: First 5 columns are empty, last 2 columns (Gencho, Gencho+AS) show 3 additional IR variations
+- **Gencho Variations**: Shows 3 different versions (gs3_1, gs3_2, gs3_3) for each IR example
 
 ## Text-Controllable Table Structure
 
