@@ -94,6 +94,11 @@
             <br><br>
             
             <h3>I. RIR Generation</h3>
+            <p> 
+                We evaluate the performance of Gencho on RIRs from unseen datasets, specifically the <a href="https://openairlib.net/" target="_blank">OpenAIR Library</a> dataset and 
+                unseen clean speech utterances from DAPS dataset. The groups of are organized by environment, and for each pair of rows, the top row is the impulse response 
+                and the second row is the corresponding reverberant speech. 
+            </p>
             <table class="table table-sm text-center" style="vertical-align: top; font-size: 0.85rem;" id="rir-generation-table">
 				 <thead style="font-size: 0.85em;">
 					<tr>
@@ -113,6 +118,14 @@
             <br><br>
 
             <h3>II. Blind estimation on real-world recordings</h3>
+            <p>
+                We evaluate the performance of Gencho on real-world recordings. We use the Device and Produced Speech 
+                <a href="https://ccrma.stanford.edu/~gautham/Site/daps.html" target="_blank">DAPS</a> dataset to evaluate the performance of Gencho on real-world recordings.
+                Varied recording devices were placed in various rooms, and clean speech was played aloud in each room. We first use an audio source separation model to separate 
+                the background noise, early speech, and late speech. Below, we show the results of each model on the DAPS dataset. Half of each audio is the original recording 
+                concatenated with the resynthesized audio mix using the clean DAPS speech, the generated IR, and the additive noise that was separated in the source separation step. 
+                The order of ground truth audio mixture and resynthesied audio mixture is randomized. Try guessing which is which!
+            </p>
             <table class="table table-sm text-center" style="vertical-align: top; font-size: 0.85rem;" id="mos-table">
                 <thead style="font-size: 0.85em;">
                    <tr>
@@ -134,6 +147,15 @@
 
             <br><br>
             <h3>III. Text-Controllable RIR Generation</h3>
+            <p>
+                Our diffusion-based IR generator enables the creation of diverse, novel impulse responses under weak guidance and can be extended 
+                to a broad range of multi-modal applications. We adapt the model for text-controllable IR generation (i.e., text-to-IR) by 
+                replacing the audio encoder with a Flan-T5-XXL2 text encoder. The diffusion model cross-attends to the text embedding sequence. 
+            </p>
+            <p>
+                Below are the results of text-controllable IR generation. Note the diverstiy of generated IRs for the same text prompt.
+            </p>
+            <br>
             <table class="table table-sm text-center" style="vertical-align: top; font-size: 0.85rem;" id="text-controllable-table">
                 <thead style="font-size: 0.85em;">
                    <tr>

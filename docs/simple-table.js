@@ -424,7 +424,7 @@ function buildMOSTable(tbody, config) {
         columnOrder.forEach(prefix => {
             const cell = document.createElement('td');
             const filename = `${prefix}_${example.suffix}.mp3`;
-            const audioPath = `source/tab_1/mos_samples/${filename}`;
+            const audioPath = `source/audio/mos_samples/${filename}`;
             cell.appendChild(createAudio(audioPath));
             row.appendChild(cell);
         });
