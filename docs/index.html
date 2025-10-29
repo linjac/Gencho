@@ -91,14 +91,32 @@
                     The audio examples below are the target RIRs, input reverberant speech, and the generated RIRs and 
                     resynthesized reverberant speech.
                 </p>
+            
+            
             <br><br>
             
             <h3>I. RIR Generation</h3>
             <p> 
-                We evaluate the performance of Gencho on RIRs from unseen datasets, specifically the <a href="https://openairlib.net/" target="_blank">OpenAIR Library</a> dataset and 
-                unseen clean speech utterances from DAPS dataset. The groups of are organized by environment, and for each pair of rows, the top row is the impulse response 
+                We evaluate the performance of Gencho on RIRs from unseen datasets, specifically using RIRs from the <a href="https://openairlib.net/" target="_blank">OpenAIR Library</a> dataset and 
+                unseen clean speech utterances from DAPS dataset. The groups of audio examples are organized by environment, and for each pair of rows, the top row is the impulse response 
                 and the second row is the corresponding reverberant speech. 
             </p>
+
+            <h6>Legend</h6>
+            <div class="row" style="font-size: 0.85rem;">
+                <div class="col">
+                    <ul class="list-unstyled">
+                        <li><span class="target"><strong>Dry Speech</strong></span> - Clean, non-reverberant speech recordings</li>
+                        <li><span class="target"><strong>Input & Target</strong></span> - Ground truth IR and reverberant speech</li>
+                        <li><span class="fins"><strong>FiNS</strong></span> - FiNS baseline model for blind IR estimation</li>
+                        <li><span class="fins"><strong>FiNS+LN</strong></span> - Updated FiNS with Layer Normalization</li>
+                        <li><span class="fins"><strong>FiNS+LN+AS</strong></span> - Updated FiNS with Layer Normalization and Audio Source separation (AS). This model takes two channels of input: early reverberation speech and full reverberation speech. </li>
+                        <li><span class="decor"><strong><u>Gencho (ours)</u></strong></span> - "<strong>Gen</strong>(erative) (e)<strong>cho</strong>" Proposed diffusion-transformer blind IR estimation model (single-channel). Shares FiNS+LN encoder architecture.</li>
+                        <li><span class="decor"><strong><u>Gencho+AS (ours)</u></strong></span> - Gencho with Audio Source separation (AS) as described above. Shares FiNS+LN+AS encoder architecture.</li>
+                    </ul>
+                </div>
+            </div>
+
             <table class="table table-sm text-center" style="vertical-align: top; font-size: 0.85rem;" id="rir-generation-table">
 				 <thead style="font-size: 0.85em;">
 					<tr>
@@ -120,23 +138,45 @@
             <h3>II. Blind estimation on real-world recordings</h3>
             <p>
                 We evaluate the performance of Gencho on real-world recordings. We use the Device and Produced Speech 
-                <a href="https://ccrma.stanford.edu/~gautham/Site/daps.html" target="_blank">DAPS</a> dataset to evaluate the performance of Gencho on real-world recordings.
-                Varied recording devices were placed in various rooms, and clean speech was played aloud in each room. We first use an audio source separation model to separate 
-                the background noise, early speech, and late speech. Below, we show the results of each model on the DAPS dataset. Half of each audio is the original recording 
-                concatenated with the resynthesized audio mix using the clean DAPS speech, the generated IR, and the additive noise that was separated in the source separation step. 
-                The order of ground truth audio mixture and resynthesied audio mixture is randomized. Try guessing which is which!
+                <a href="https://ccrma.stanford.edu/~gautham/Site/daps.html" target="_blank">(DAPS)</a> dataset to evaluate the performance of Gencho on real-world recordings.
+                In DAPS, varied recording devices were placed in various rooms, and clean speech was played aloud in each room. 
+                <br>
+                We first use an audio source separation model to separate recordings into background noise (BK), early speech (ES), and late speech (LS). Depending on the model, 
+                the inputs are either the single channel reverberant mixture (ES+LS) or two channels ((ES), (ES+LS)).
+                <br><br>
+                Below, we show the results of each model. Half of each audio sample is the original recording concatenated with the resynthesized audio mix using 
+                the clean DAPS speech, the generated IR, and the noise that was separated in the source separation step. 
+                The order of ground truth audio mixture and resynthesied audio mixture is randomized. Try guessing which half of the audio sample is which!
             </p>
+
+            <h6>Legend</h6>
+            <div class="row" style="font-size: 0.85rem;">
+                <div class="col">
+                    <ul class="list-unstyled">
+                        <li><span><strong>Location (Device)</strong></span> - Name of the recording location and device type</li>
+                        <li><span class="target"><strong>Clean</strong></span> - Clean dry speech that was played aloud in the room</li>
+                        <li><span class="fins"><strong>FiNS</strong></span> - FiNS baseline model for blind IR estimation. 1ch input - (ES+LS)</li>
+                        <li><span class="fins"><strong>FiNS+LN</strong></span> - Updated FiNS with Layer Normalization. 1ch input - (ES+LS)</li>
+                        <li><span class="fins"><strong>FiNS+LN+AS</strong></span> - Updated FiNS with Layer Normalization. 2ch input - (ES, ES+LS)</li>
+                        <li><span class="decor"><strong><u>Gencho (ours)</u></strong></span> - Proposed diffusion-transformer blind IR estimation model. Shares FiNS+LN encoder architecture. 1ch input - (ES+LS)</li>
+                        <li><span class="decor"><strong><u>Gencho+AS (ours)</u></strong></span> - Proposed diffusion-transformer blind IR estimation model. Shares FiNS+LN+AS encoder architecture. 2ch input - (ES, ES+LS)</li>
+                        <li><span class="decor"><strong><u>FiNS+LN+AS -> Gencho+AS</u></strong></span> - FiNS+LN+AS -> Gencho+AS. This model is the same as Gencho+AS, but an additional input is the first 5 ms of the output of FiNS+LN+AS. This is to test improvements by using both models, first to generate the early reflections as a prompt for the diffusion model.</li>
+                        <li><span class="recording" style="font-size:0.9em;">Mixture</span> - BK + ES + LS</li>
+                    </ul>
+                </div>
+            </div>
+
             <table class="table table-sm text-center" style="vertical-align: top; font-size: 0.85rem;" id="mos-table">
                 <thead style="font-size: 0.85em;">
                    <tr>
                      <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="recording" style="font-size:0.9em;">Location (Device)</span></th>
                      <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="target" style="font-size:0.9em;">Clean</span></th>
-                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="fins" style="font-size:0.9em;">FiNS-FT</span></th>
-                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="fins" style="font-size:0.9em;">FiNS-LN</span></th>
-                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="fins" style="font-size:0.9em;">FiNS-LN-2S</span></th>
-                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="decor" style="font-size:0.9em;">Diffusion-1S</span></th>
-                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="decor" style="font-size:0.9em;">Diffusion-2S</span></th>
-                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="decor" style="font-size:0.9em;">Diffusion-2S-5ms</span></th>
+                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="fins" style="font-size:0.9em;">FiNS</span></th>
+                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="fins" style="font-size:0.9em;">FiNS+LN</span></th>
+                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="fins" style="font-size:0.9em;">FiNS+LN+AS</span></th>
+                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="decor" style="font-size:0.9em;">Gencho</span></th>
+                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="decor" style="font-size:0.9em;">Gencho+AS</span></th>
+                     <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="decor" style="font-size:0.9em;">FiNS+LN+AS -> Gencho+AS</span></th>
                      <th scope="col" style="padding: 0.3rem 0.2rem;"> <span class="recording" style="font-size:0.9em;">Mixture</span></th>
                    </tr>
                 </thead>
@@ -153,7 +193,7 @@
                 replacing the audio encoder with a Flan-T5-XXL2 text encoder. The diffusion model cross-attends to the text embedding sequence. 
             </p>
             <p>
-                Below are the results of text-controllable IR generation. Note the diverstiy of generated IRs for the same text prompt.
+                Below are the results of text-controllable IR generation. We generate four variations of IRs for each text prompt. Note the diverstiy of generated IRs for the same text prompt.
             </p>
             <br>
             <table class="table table-sm text-center" style="vertical-align: top; font-size: 0.85rem;" id="text-controllable-table">
