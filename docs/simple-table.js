@@ -299,19 +299,19 @@ const tableConfigs = {
         examples: [
             {
                 name: 'Living Room (iPad)',
-                suffix: 'f5-script1-ipad-livingroom1-00027+00028'
+                suffix: 'ipad-livingroom1_f5-script1-00027+00028'
             },
             {
                 name: 'Office (iPad)',
-                suffix: 'f8-script1-ipad-office1-00023+00024'
+                suffix: 'ipad-office1_f8-script1-00023+00024'
             },
             {
                 name: 'Balcony (iPad)',
-                suffix: 'm2-script1-ipad-balcony1-00001+00002'
+                suffix: 'ipad-balcony1_m2-script1-00001+00002'
             },
             {
                 name: 'Bedroom (iPhone)',
-                suffix: 'm8-script1-iphone-bedroom1-00009+00010'
+                suffix: 'iphone-bedroom1_m8-script1-00009+00010'
             }
         ]
     }
