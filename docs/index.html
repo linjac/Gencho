@@ -45,10 +45,10 @@
                 <br>
                 <sup>4</sup>MIT
                 
-                <!-- <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="https://arxiv.org/abs/2402.00859" target="blank_" type="button" class="btn btn-secondary">arXiv</a>
-                    <a href="https://github.com/linjac/rir-completion/" type="button" class="btn btn-secondary">Code</a>
-                </div> -->
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="https://arxiv.org/abs/2602.09233" target="blank_" type="button" class="btn btn-secondary">arXiv</a>
+                    <a href="https://linjac.github.io/Gencho/" type="button" class="btn btn-secondary">Website</a>
+                </div>
             </div>
         </div>
         <div class="row justify-content-md-center" style="padding-top: 2rem; padding-bottom: 1.5rem; padding-left: 5rem; padding-right: 5rem;">
@@ -68,16 +68,14 @@
                     <div class="col-md-12 text-justify">
                         <p>
                             <b>Abstract</b>
-							Blind room impulse response estimation (IR) is a core task for capturing and transferring acoustic properties, 
-                            yet existing methods often suffer from limited flexibility and mode collapse under unseen conditions. Furthermore, 
-                            emerging generative audio applications call for more flexible impulse response generation methods. We propose 
-                            Gencho, a complex-spectrogram diffusion-transformer model that estimates RIRs directly from reverberant speech. 
-                            A structure-aware encoder separates early and late reflections to provide robust conditioning, while the 
-                            diffusion decoder generates diverse and perceptually realistic responses. Gencho integrates modularly with 
-                            standard speech-processing pipelines for end-to-end acoustic matching. Results show improved generalization and 
-                            richer generated IRs than non-generative baselines. Lastly, we develop a text-controllable IR generation 
-                            proof-of-concept, demonstrating Gencho’s versatility for controllable acoustic simulation and generative 
-                            audio applications.
+							Blind room impulse response (RIR) estimation is a core task for capturing and transferring acoustic properties; yet existing methods 
+							often suffer from limited modeling capability and degraded performance under unseen conditions. Moreover, emerging generative audio 
+							applications call for more flexible impulse response generation methods. We propose Gencho, a diffusion-transformer-based model that 
+							predicts complex spectrogram RIRs from reverberant speech. A structure-aware encoder leverages isolation between early and late reflections 
+							to encode the input audio into a robust representation for conditioning, while the diffusion decoder generates diverse and perceptually 
+							realistic impulse responses from it. Gencho integrates modularly with standard speech processing pipelines for acoustic matching. Results 
+							show richer generated RIRs than non-generative baselines while maintaining strong performance in standard RIR metrics. We further demonstrate 
+							its application to text-conditioned RIR generation, highlighting Gencho's versatility for controllable acoustic simulation and generative audio tasks.
                         </p>
                         <hr>
                     </div>
@@ -251,5 +249,6 @@
     <script src="js/slider.js"></script>
     <script src="simple-table.js"></script>
 </body>
+
 
 </html>
